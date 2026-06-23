@@ -10,6 +10,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    .hidden-tab { display: none !important; }
+  </style>
 </head>
 <body>
   <main>
@@ -77,20 +80,20 @@
       <nav class="navbar">
         <ul class="navbar-list">
           <li class="navbar-item">
-            <button class="navbar-link active" data-nav-link>About</button>
+            <button class="navbar-link active" onclick="showTab('about')">About</button>
           </li>
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
+            <button class="navbar-link" onclick="showTab('resume')">Resume</button>
           </li>
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
+            <button class="navbar-link" onclick="showTab('portfolio')">Portfolio</button>
           </li>
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
+            <button class="navbar-link" onclick="showTab('contact')">Contact</button>
           </li>
         </ul>
       </nav>
-      <article class="about active" data-page="about">
+      <article class="about" id="about-page">
         <header>
           <h2 class="h2 article-title">About me</h2>
         </header>
@@ -152,7 +155,7 @@
           </ul>
         </section>
       </article>
-      <article class="resume" data-page="resume">
+      <article class="resume hidden-tab" id="resume-page">
         <header>
           <h2 class="h2 article-title">Resume</h2>
         </header>
@@ -253,7 +256,7 @@
           </ul>
         </section>
       </article>
-      <article class="portfolio" data-page="portfolio">
+      <article class="portfolio hidden-tab" id="portfolio-page">
         <header>
           <h2 class="h2 article-title">Portfolio</h2>
         </header>
@@ -286,7 +289,7 @@
           </ul>
         </section>
       </article>
-      <article class="contact" data-page="contact">
+      <article class="contact hidden-tab" id="contact-page">
         <header>
           <h2 class="h2 article-title">Contact</h2>
         </header>
@@ -313,7 +316,24 @@
       </article>
     </div>
   </main>
-  <script src="./assets/js/script.js"></script>
+  <script>
+    function showTab(tabName) {
+      // Hide all tabs
+      document.getElementById('about-page').classList.add('hidden-tab');
+      document.getElementById('resume-page').classList.add('hidden-tab');
+      document.getElementById('portfolio-page').classList.add('hidden-tab');
+      document.getElementById('contact-page').classList.add('hidden-tab');
+      
+      // Remove active class from all buttons
+      document.querySelectorAll('.navbar-link').forEach(btn => btn.classList.remove('active'));
+      
+      // Show selected tab
+      document.getElementById(tabName + '-page').classList.remove('hidden-tab');
+      
+      // Add active class to clicked button
+      event.target.classList.add('active');
+    }
+  </script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
